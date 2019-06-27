@@ -14,50 +14,44 @@ class App extends Component {
         this.state = {
             listImage: [],
             page: 1,
-            perPage: 20,
+            perPage: 5,
             hasMoreItems: true,
 
         };
         
     }
-    /*componentDidMount() {
-        const {page, perPage } = this.state;
-        axios.get(`${api.baseUrl}?api_key=${api.key}&limit=${perPage}&offset=${(page-1) * perPage}`)
-            .then(res => {
-                const listImage = res.data.data;
-                this.setState({ listImage:  listImage.concat(this.state.listImage)});
-                console.log(listImage);
-        })
-        .catch(error => console.log(error));
-    }*/
-
+    
     loadItems() {
         const { page, perPage } = this.state;
         
         axios.get(`${api.baseUrl}?api_key=${api.key}&limit=${perPage}&offset=${(page-1) * perPage}`)
             .then(res => {
                 const listImage = res.data.data;
-                this.setState({ listImage:  listImage.concat(this.state.listImage)});
-                console.log(listImage);
+                this.setState({ 
+                    listImage:  listImage.concat(this.state.listImage),
+                    page: page + 1
+            });
         })
     }
-    
-    
     
     render() {
         const { listImage } = this.state;
         const loader = <div className="loader">Loading ...</div>;
         var item = []
         listImage.map((img) => {
-            item.push(
-                <a key={img.id} className="item" href={img.images.fixed_width.url}>
-                    <img src={img.images.fixed_width.url} alt=""/>
-                </a>
+            return item.push(
+                <div className="item" key={img.id}>
+                    <a href={'#' + img.id} key={img.id}>
+                        <img src={img.images.fixed_height_still.url} alt="myImage"/>
+                    </a>
+                    <div className="zoomout-target" id={img.id}>
+                        <img src={img.images.original.url} alt="myZoomImage"/>
+                        <a className="zoomout-close" href="#"></a>
+                    </div>
+                </div>
             )
         })
-        /*if(listImage.length === 0 ) {
-            return <div>Loading</div>
-        }*/
+        
         return (
             <InfiniteScroll
                 pageStart={0}
@@ -66,10 +60,9 @@ class App extends Component {
                 loader={loader}>
 
                 <div className="container">
-                    {item}
+                    {item.reverse()}
                 </div>
             </InfiniteScroll>
-            
         );
     }
 }

@@ -2,7 +2,6 @@
 	width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 
@@ -12,6 +11,11 @@
 .container .item {
 	width: 48%;
     margin: 1%;
+}
+
+.container .item a img {
+    width: 100%;
+    height: 100%;
 }
 
 /* Tablet */
@@ -31,20 +35,11 @@
     }
 }
 
-
-/*Eliminates padding, centers the thumbnail */
-
-
-    
-    /* Styles the thumbnail */
-    
-    
-    
-    /* Styles the lightbox, removes it from sight and adds the fade-in transition */
-    
-    .lightbox-target {
+/* Styles the zoomout, removes it from sight and adds the fade-in transition */
+.zoomout-target {
     position: fixed;
     top: -100%;
+    left: 0;
     width: 100%;
     background: rgba(0,0,0,.7);
     width: 100%;
@@ -54,17 +49,17 @@
     -o-transition: opacity .5s ease-in-out;
     transition: opacity .5s ease-in-out;
     overflow: hidden;
-    }
+}
     
-    /* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
+/* Styles the zoomout image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
     
-    .lightbox-target img {
+.zoomout-target img {
     margin: auto;
     position: absolute;
-    top: 0;
-    left:0;
-    right:0;
-    bottom: 0;
+    top: 10%;
+    left: 0%;
+    right:10%;
+    bottom: 10%;
     max-height: 0%;
     max-width: 0%;
     border: 3px solid white;
@@ -74,11 +69,11 @@
     -moz-transition: .5s ease-in-out;
     -o-transition: .5s ease-in-out;
     transition: .5s ease-in-out;
-    }
+}
     
-    /* Styles the close link, adds the slide down transition */
+/* Styles the close link, adds the slide down transition */
     
-    a.lightbox-close {
+a.zoomout-close {
     display: block;
     width:50px;
     height:50px;
@@ -93,11 +88,11 @@
     -moz-transition: .5s ease-in-out;
     -o-transition: .5s ease-in-out;
     transition: .5s ease-in-out;
-    }
+}
     
-    /* Provides part of the "X" to eliminate an image from the close link */
+/* Provides part of the "X" to eliminate an image from the close link */
     
-    a.lightbox-close:before {
+a.zoomout-close:before {
     content: "";
     display: block;
     height: 30px;
@@ -110,11 +105,11 @@
     -moz-transform:rotate(45deg);
     -o-transform:rotate(45deg);
     transform:rotate(45deg);
-    }
+}
     
-    /* Provides part of the "X" to eliminate an image from the close link */
+/* Provides part of the "X" to eliminate an image from the close link */
     
-    a.lightbox-close:after {
+a.zoomout-close:after {
     content: "";
     display: block;
     height: 30px;
@@ -127,25 +122,30 @@
     -moz-transform:rotate(-45deg);
     -o-transform:rotate(-45deg);
     transform:rotate(-45deg);
-    }
+}
     
-    /* Uses the :target pseudo-class to perform the animations upon clicking the .lightbox-target anchor */
+/* Uses the :target pseudo-class to perform the animations upon clicking the .zoomout-target anchor */
     
-    .lightbox-target:target {
+.zoomout-target:target {
     opacity: 1;
     top: 0;
     bottom: 0;
-    }
+}
     
-    .lightbox-target:target img {
+.zoomout-target:target img {
     max-height: 100%;
     max-width: 100%;
-    }
+    width: 100%;
+    height: 100%;
+}
     
-    .lightbox-target:target a.lightbox-close {
+.zoomout-target:target a.zoomout-close {
     top: 0px;
-    }
+}
     
 .loader {
     clear: both;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
 }
