@@ -1,0 +1,2 @@
+export const LOAD_IMAGE = 'LOAD_IMAGE';
+export const LOAD_IMAGE_SUCCESS = 'LOAD_IMAGE_SUCCESS';
